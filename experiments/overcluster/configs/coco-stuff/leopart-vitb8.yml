@@ -1,0 +1,22 @@
+num_workers: 12
+gpus: 1
+
+tags: "finetune_linear"
+
+data:
+  data_dir: "<your coco dir>"
+  dataset_name: "coco-stuff"
+  size_crops: 448
+
+val:
+  method: 'ours'
+  arch: 'vit-base'
+  batch_size:  20
+  restart: False
+  num_seeds: 5
+  K: 500
+  pca_dim: 50
+  ckpt_path: null
+  ckpt_dir: "<your ckpt dir>"
+  patch_size: 8
+  fast_dev_run: 300

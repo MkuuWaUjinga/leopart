@@ -1,0 +1,24 @@
+num_workers: 12
+gpus: 2
+
+tags: "finetune_linear"
+
+data:
+  data_dir: "/scratch/shared/beegfs/yuki/data"
+  dataset_name: "voc"
+  size_crops: 448
+
+train:
+  head_type: 'linear'
+  method: 'ours'
+  arch: 'vit-base'
+  batch_size: 6
+  val_iters: 10
+  restart: False
+  ckpt_path: "<path_to>/vitb8-100eps-ckp-epoch=94.ckpt"
+  ckpt_dir: "/scratch/shared/beegfs/yuki/obdet/ckpt/"
+  lr: 0.1
+  patch_size: 8
+  max_epochs: 25
+  drop_at: 20
+  fast_dev_run: False

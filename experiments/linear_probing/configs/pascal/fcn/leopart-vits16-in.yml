@@ -1,0 +1,25 @@
+num_workers: 12
+gpus: 2
+
+tags: "finetune_fcn"
+
+data:
+  data_dir: "<your voc dir>"
+  dataset_name: "voc"
+  size_crops: 448
+
+train:
+  head_type: 'fcn'
+  method: 'ours'
+  arch: 'vit'
+  batch_size: 32
+  val_iters: 8
+  restart: False
+  ckpt_path: "<your ckpt>"
+  ckpt_dir: "<your ckpt dir>"
+  lr: 0.01
+  patch_size: 16
+  max_epochs: 30
+  drop_at: 20
+  decay_rate: 0.1
+  fast_dev_run: False

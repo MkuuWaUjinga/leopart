@@ -1,0 +1,22 @@
+num_workers: 20
+gpus: 0
+
+tags: "finetune_linear"
+
+data:
+  data_dir: "<your ade20k dir>"
+  dataset_name:  "ade20k"
+  size_crops: 448
+
+val:
+  method: 'ours'
+  arch: 'vit'
+  batch_size: 40
+  restart: False
+  num_seeds: 5
+  K: 500
+  pca_dim: 50
+  ckpt_path: "<your exp4 ckpt>"
+  ckpt_dir: "<your ckpt dir>"
+  patch_size: 16
+  fast_dev_run: 150
