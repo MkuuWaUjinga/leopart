@@ -1,7 +1,7 @@
 # [CVPR 2022] Leopart: Self-Supervised Learning of Object Parts for Semantic Segmentation 🐆
 
 Pytorch implementation and pretrained models for Leopart. For more details refer to:
-[[`arXiv`](google.com)]
+[[`arXiv`](https://arxiv.org/abs/2204.13101)]
 
 <div>
   <img width="100%" alt="Leopart illustration" src="images/method.png">
