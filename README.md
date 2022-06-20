@@ -240,3 +240,14 @@ dataset root.
 ```
 This follows the official structure as obtained by unzipping the downloaded dataset file.
 
+# Citation
+If you find this repository useful, please consider starring or citing 🐆
+```
+@inproceedings{ziegler2022self,
+  title={Self-Supervised Learning of Object Parts for Semantic Segmentation},
+  author={Ziegler, Adrian and Asano, Yuki M},
+  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+  pages={14502--14511},
+  year={2022}
+}
+```
