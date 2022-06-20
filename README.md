@@ -6,10 +6,6 @@ Pytorch implementation and pretrained models for Leopart. For more details refer
 
 [![IMAGE ALT TEXT HERE](images/full-method.gif)](https://www.youtube.com/watch?v=j1cOECMJMCI)
 
-//<div>
-//  <img width="100%" alt="Leopart illustration" src="">
-//</div>
-
 ### Pretrained Models
 
 Below are links to our models pretrained with Leopart.
