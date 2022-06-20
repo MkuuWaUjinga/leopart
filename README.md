@@ -57,6 +57,11 @@ model.load_state_dict({".".join(k.split(".")[1:]): v for k, v in state_dict.item
 ```
 
 ### Fine-Tune with Leopart loss
+
+<p align="center">
+  <img width="80%" alt="Loss learning progress" src="images/loss_k=200.gif">
+</p>
+
 Fine-Tuning with Leopart does not require an immense GPU budget.
 We used mostly two K80 or P40 GPUs for training.
 Thus, Leopart is an easy win to make your ViT more spatially aware. For ImageNet-like data we already did the work for 
@@ -97,17 +102,28 @@ Exemplary calls can be found in `experiments/linear_probing/eval/eval_batch.sh`
 
 ### Fully unsupervised semantic segmentation
 To show the expressiveness of our embeddings learnt, we tackle fully unsupervised semantic segmentation.
+
 We run cluster-based foreground extraction as well as community detection as a novel, 
 unsupervised way to create a many-to-one mapping from clusters to ground-truth objects.
 
 To reproduce our results you can run 
 ```
-python experiments/fully_unsup_seg/fully_unsup_seg.py --ckpt_path {vit-base-ckpt} --experiment_name vitb8 --best_k 109 --best_mt 0.4 --best_et 0.07
+python experiments/fully_unsup_seg/fully_unsup_seg.py --ckpt_path {vit-base-ckpt} --experiment_name vitb8 --arch vit-base --patch_size 8  --best_k 109 --best_mt 0.4 --best_et 0.07
 ```
 ```
 python experiments/fully_unsup_seg/fully_unsup_seg.py --ckpt_path {vit-small-ckpt} --experiment_name vits16 --best_k 149 --best_mt 2 --best_et 0.09
 ```
 for ViTB-8 and ViTS-16 respectively.
+
+#### Cluster-Based Foreground Extraction
+<p align="center">
+  <img width="80%" alt="Loss learning progress" src="images/method-cbfe-no-title.gif">
+</p>
+
+#### Overclustering + Community Detection
+<p align="center">
+  <img width="80%" alt="Loss learning progress" src="images/method-cd-newnew.gif">
+</p>
 
 ### Setup
 
