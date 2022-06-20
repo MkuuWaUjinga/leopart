@@ -1,7 +1,7 @@
 # [CVPR 2022] Leopart: Self-Supervised Learning of Object Parts for Semantic Segmentation 🐆
 
 Pytorch implementation and pretrained models for Leopart. For more details refer to:
-[[`arXiv`](google.com)]
+[[`arXiv`](https://arxiv.org/abs/2204.13101)]
 
 <div>
   <img width="100%" alt="Leopart illustration" src="images/method.png">
@@ -62,7 +62,7 @@ We used mostly two K80 or P40 GPUs for training.
 Thus, Leopart is an easy win to make your ViT more spatially aware. For ImageNet-like data we already did the work for 
 you - just download our pretrained models.
 If you're working with different data, say satellite imagery or medical images, it is worth a try to fine-tune with Leopart
-- especially if you have a lot of unlabelled data.
+– especially if you have a lot of unlabelled data.
 Note that you can change the config according to your needs. For fine-tuning on a new dataset, you'd have to 
 change the data path, add a data module and initialize it in `finetune_with_leopart.py`.
 In case you run into any problems or want to share ideas, feel free to 
