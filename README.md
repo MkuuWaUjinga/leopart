@@ -82,7 +82,7 @@ python experiments/finetune_with_leopart.py --config_path experiments/configs/tr
 Also you can adjust parameters such as the number of gpus or the batch size using the config.
 
 #### Evaluation: Overclustering
-For overclustering evalaution we provide a script `sup_overcluster.py` under `experiments/overcluster`.
+For overclustering evaluation we provide a script `sup_overcluster.py` under `experiments/overcluster`.
 An exemplary call to evaluate a Leopart trained on ImageNet-100 on Pascal VOC could look like this:
 ```
 python experiments/overcluster/sup_overcluster.py --config_path experiments/overcluster/configs/pascal/leopart-vits16-in.yml
@@ -102,16 +102,18 @@ Exemplary calls can be found in `experiments/linear_probing/eval/eval_batch.sh`
 
 ### Fully unsupervised semantic segmentation
 To show the expressiveness of our embeddings learnt, we tackle fully unsupervised semantic segmentation.
-
 We run cluster-based foreground extraction as well as community detection as a novel, 
-unsupervised way to create a many-to-one mapping from clusters to ground-truth objects.
+unsupervised way to create a many-to-one mapping from clusters to ground-truth objects. 
+For cluster-based foreground extraction we take the DINO ViT-S/16 attention maps as noisy ground-truth for foreground. 
+Please download the [train masks](https://www.dropbox.com/s/ixu3spqwskc63jn/attn_dino_train.pt?dl=0)
+and the [val masks](https://www.dropbox.com/s/i6jotwu1xw6k29x/attn_dino_val.pt?dl=0) into `./experiments/fully_unsup_seg/` before running the script.
 
 To reproduce our results you can run 
 ```
-python experiments/fully_unsup_seg/fully_unsup_seg.py --ckpt_path {vit-base-ckpt} --experiment_name vitb8 --arch vit-base --patch_size 8  --best_k 109 --best_mt 0.4 --best_et 0.07
+python experiments/fully_unsup_seg/fully_unsup_seg.py --ckpt_path {vit-base-ckpt} --experiment_name vitb8 --arch vit-base --patch_size 8  --best_k 109 --best_mt 0.4 --best_wt 0.07
 ```
 ```
-python experiments/fully_unsup_seg/fully_unsup_seg.py --ckpt_path {vit-small-ckpt} --experiment_name vits16 --best_k 149 --best_mt 2 --best_et 0.09
+python experiments/fully_unsup_seg/fully_unsup_seg.py --ckpt_path {vit-small-ckpt} --experiment_name vits16 --best_k 149 --best_mt 2 --best_wt 0.09
 ```
 for ViTB-8 and ViTS-16 respectively.
 
@@ -207,6 +209,8 @@ dataset root.
 │           │   ...
 ```
 ##### VOC Pascal
+Here's a [zipped version](https://www.dropbox.com/s/6gd4x0i9ewasymb/voc_data.zip?dl=0) for convenience.
+
 The structure for training and evaluation should be as follows:
 ```
 dataset root.
