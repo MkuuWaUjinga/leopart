@@ -100,7 +100,7 @@ def cluster_all(transformed_feats: torch.Tensor, seed: int, K: List[int], spatia
 def cluster_based_fg_extraction(save_folder: str, overclustering_eval_size: int, experiment_folder: str,
                                 k_fg_extraction: int, seed_fg_extraction: int, masks_eval_size: int):
     # Load noisy fg mask and clusters for train data
-    noisy_fg_train = torch.load(os.path.join(save_folder, "attn_voc_train.pt"))
+    noisy_fg_train = torch.load(os.path.join(save_folder, "attn_dino_train.pt"))
     noisy_fg_train = nn.functional.interpolate(noisy_fg_train,
                                                size=(overclustering_eval_size, overclustering_eval_size),
                                                mode='nearest')
@@ -136,7 +136,7 @@ def cluster_based_fg_extraction(save_folder: str, overclustering_eval_size: int,
                os.path.join(experiment_folder, f"cluster_saliency_train_{k_fg_extraction}_{seed_fg_extraction}.pt"))
 
     # Apply threshold to val data
-    noisy_fg_val = torch.load(os.path.join(save_folder, "attn_voc_val.pt"))
+    noisy_fg_val = torch.load(os.path.join(save_folder, "attn_dino_val.pt"))
     noisy_fg_val = nn.functional.interpolate(noisy_fg_val, size=(overclustering_eval_size, overclustering_eval_size),
                                              mode='nearest')
     val_clusters = torch.load(os.path.join(experiment_folder, "clusters",
@@ -266,7 +266,8 @@ def start_unsup_seg(patch_size: int, arch: str, ckpt_path: str, experiment_name:
         msg = model.load_state_dict(weights, strict=False)
         print(f"Loaded model: {msg}")
 
-        store_and_compute_features(data_module, pca_dim, model, device, spatial_res, experiment_folder, save_attn=True)
+        store_and_compute_features(data_module, pca_dim, model, device, spatial_res, experiment_folder,
+                                   gt_save_folder=save_folder, save_attn=True)
 
     # Cluster features to k_fg_extraction for cluster-based foreground extraction (CBFE)
     root_cluster_folder = os.path.join(experiment_folder, "clusters")

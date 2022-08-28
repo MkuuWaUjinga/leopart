@@ -330,11 +330,12 @@ def compute_features(loader: DataLoader, model: nn.Module, device: str, spatial_
 
 
 def store_and_compute_features(datamodule: VOCDataModule, pca_dim: int, model: nn.Module, device: str,
-                               spatial_res: int, experiment_folder: str, save_attn : bool = True):
+                               spatial_res: int, experiment_folder: str, gt_save_folder: str = None,
+                               save_attn : bool = True):
     train_feats, train_gt, train_attns = compute_features(datamodule.train_dataloader(),
                                                           model, device, spatial_res)
     print("computed train features")
-    val_feats, _, val_attns = compute_features(datamodule.val_dataloader(),
+    val_feats, val_gt, val_attns = compute_features(datamodule.val_dataloader(),
                                                model, device, spatial_res)
     print("computed val features")
 
@@ -349,6 +350,14 @@ def store_and_compute_features(datamodule: VOCDataModule, pca_dim: int, model: n
     os.makedirs(experiment_folder, exist_ok=True)
     torch.save(transformed_feats[:len(datamodule.voc_train)], os.path.join(experiment_folder, "all_pascal_train.pt"))
     torch.save(transformed_feats[len(datamodule.voc_train):], os.path.join(experiment_folder, "all_pascal_val.pt"))
+
+    if gt_save_folder is not None:
+        train_path = os.path.join(gt_save_folder, "all_gt_masks_train_voc12.pt")
+        if not os.path.exists(train_path):
+            torch.save(torch.cat(train_gt), train_path)
+        val_path = os.path.join(gt_save_folder, "all_gt_masks_val_voc12.pt")
+        if not os.path.exists(val_path):
+            torch.save(torch.cat(val_gt), val_path)
 
     # postprocess attentions
     if save_attn:
