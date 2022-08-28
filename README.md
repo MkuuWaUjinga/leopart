@@ -106,7 +106,7 @@ We run cluster-based foreground extraction as well as community detection as a n
 unsupervised way to create a many-to-one mapping from clusters to ground-truth objects. 
 For cluster-based foreground extraction we take the DINO ViT-S/16 attention maps as noisy ground-truth for foreground. 
 Please download the [train masks](https://www.dropbox.com/s/ixu3spqwskc63jn/attn_dino_train.pt?dl=0)
-and the [val masks](https://www.dropbox.com/s/i6jotwu1xw6k29x/attn_dino_val.pt?dl=0) into `./experiments/fully_unsup_seg/` before running the script.
+and the [val masks](https://www.dropbox.com/s/i6jotwu1xw6k29x/attn_dino_val.pt?dl=0) into `--save_folder` before running the script.
 
 To reproduce our results you can run 
 ```
