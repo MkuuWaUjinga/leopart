@@ -154,7 +154,7 @@ def bfscore(gt: np.array, pr: np.array, threshold: float=2, verbose=False):
 
         try:
             f1 = 2*recall*precision/(recall + precision)    # F1 score
-        except:
+        except ZeroDivisionError:
             f1 = np.nan
         if verbose:
             print("\tf1:", f1)
@@ -276,7 +276,7 @@ def bfscore_old(gtfile, prfile, threshold=2):
         f1 = 0
         try:
             f1 = 2*recall*precision/(recall + precision)    # F1 score
-        except:
+        except ZeroDivisionError:
             #f1 = 0
             f1 = np.nan
         print("\tf1:", f1)
